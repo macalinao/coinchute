@@ -63,15 +63,14 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('DashboardCtrl', function($scope, $modal, addressInfo) {
+.controller('DashboardCtrl', function($scope, $modal, addressInfo, constants) {
   $scope.account = {
     balance: 0.00,
     balanceDollars: 0,
-    address: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
+    address: constants.addrUser
   };
 
-  var addr = '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v';
-  addressInfo(addr, function(data) {
+  addressInfo(constants.addrUser, function(data) {
     $scope.account = data;
   });
 
@@ -151,10 +150,10 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('AuthLoginCtrl', function($scope) {})
 
-.controller('AuthRegisterCtrl', function($scope) {
+.controller('AuthRegisterCtrl', function($scope, constants) {
 
   var qrcode = new QRCode("qrcode", {
-    text: "http://jindo.dev.naver.com/collie",
+    text: constants.addrUser,
     width: 175,
     height: 175,
     colorDark: "#000000",
@@ -181,5 +180,11 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
         });
       });
     });
+  };
+})
+
+.factory('constants', function() {
+  return {
+    addrUser: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
   };
 });
