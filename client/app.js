@@ -230,6 +230,17 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     });
   };
 
+  $scope.launchWindow = function() {
+    var c = $scope.pay;
+    window.location = '#/auth/begin?' 
+       + (c.company ? ('company=' + c.company)
+       + (c.img ? ('&img=' + c.img) 
+       + (c.price ? ('&price=' + c.price) 
+       + (c.item ? ('&item=' + c.item) 
+       + (c.callback ? ('&callback=' + c.callback) 
+       + (c.redirect ? ('&redirect=' + c.redirect);
+  };
+
 })
 
 .controller('AuthCtrl', function($scope) {})
