@@ -1,3 +1,19 @@
+var chain = new WebSocket("wss://ws.chain.com/v2/notifications"); // connect to chain
+chain.listeners = [];
+chain.onopen = function(ev) {
+  var req = {
+    type: 'new-transaction',
+    block_chain: 'bitcoin'
+  };
+  chain.send(JSON.stringify(req));
+};
+chain.onmessage = function(ev) {
+  var x = JSON.parse(ev.data);
+  chain.listeners.filter(function(c) {
+    c(x);
+  });
+};
+
 angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .config(function($stateProvider, $urlRouterProvider) {
