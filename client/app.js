@@ -264,6 +264,29 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
       correctLevel: QRCode.CorrectLevel.H
     });
 
+    var addr = addrUser;
+    chain.listeners.push(function(x) {
+      var tx = x.payload.transaction;
+
+      var valid = _.find(tx.inputs, function(input) {
+        return _.find(input.addresses, function(a) {
+          return a == addr;
+        });
+      }) || _.find(tx.outputs, function(input) {
+        return _.find(input.addresses, function(a) {
+          return a == addr;
+        });
+      });
+
+      if (!valid) {
+        return;
+      }
+
+      addressInfo(addr, function(data) {
+        $scope.account = data;
+      });
+    });
+
   });
 
 })
