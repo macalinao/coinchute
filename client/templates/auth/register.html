@@ -32,7 +32,7 @@
         <a class="btn btn-primary disabled pull-left" style="margin-right: 20px;">Register</a>
         <p>Send some money to this address to allow registration.</p>
       </div>
-      <div ng-if="account != null">
+      <div ng-if="account != null && email != null && password != null">
         <a href="#/auth/confirm" class="btn btn-primary">Register</a>
       </div>
     </div>
