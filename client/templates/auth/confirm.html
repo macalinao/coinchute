@@ -1,6 +1,9 @@
 <h4 class="page-header">Confirm scheduled recurring payment</h4>
 
-<p>You're gonna pay xx amoudn of money!</p>
+<img ng-src="{{data.img}}" class="logo" />
+<p>You are scheduling a recurring payment to <strong>{{data.company}}</strong> on the following terms:</p>
+<p><strong>{{data.price | currency}}/month</strong> for <strong>{{data.item}}</strong>.</p>
+<p>Ensure the amounts are correct before proceeding.</p>
 
 <a href="#/auth/success" class="btn btn-primary">Confirm</a>
 

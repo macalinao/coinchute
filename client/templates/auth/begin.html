@@ -1,8 +1,7 @@
 <h4 class="page-header">Authorize recurring payment</h4>
 
-<img src="http://www.mobileworldlive.com/wp-content/uploads/2013/05/spotify-logo.jpg" class="logo" />
-<p><strong>{{company}}</strong> wants to set up a recurring payment with the following details:</p>
-<p><strong>{{price | currency}}/month</strong> for <strong>{{item}}</strong>.</p>
+<img ng-src="{{data.img}}" class="logo" />
+<p><strong>{{data.company}}</strong> wants to set up a recurring payment with the following details:</p>
+<p><strong>{{data.price | currency}}/month</strong> for <strong>{{data.item}}</strong>.</p>
 
-
-<a class="btn btn-primary" href="#/auth/login">Login</a> or <a class="btn btn-success" href="#/register">Setup new address</a>
+<a class="btn btn-primary" href="#/auth/login">Login</a> or <a class="btn btn-success" href="#/auth/register">Setup new address</a>

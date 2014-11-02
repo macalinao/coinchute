@@ -158,10 +158,18 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('AuthCtrl', function($scope) {})
 
-.controller('AuthBeginCtrl', function($scope) {
-  $scope.company = 'Spotify, Inc.';
-  $scope.price = 4.99;
-  $scope.item = 'Spotify Premium';
+.controller('AuthBeginCtrl', function($scope, $location, currauth) {
+  var s = $location.search();
+  var data = {
+    company: s.company || 'Spotify, Inc.',
+    img: s.img || 'http://www.mobileworldlive.com/wp-content/uploads/2013/05/spotify-logo.jpg',
+    price: parseFloat(s.price) || 4.99,
+    item: s.item || 'Spotify Premium',
+    callback: s.callback || 'http://google.com',
+    redirect: s.redirect || 'http://google.com'
+  };
+  currauth.data = data;
+  $scope.data = data;
 })
 
 .controller('AuthLoginCtrl', function($scope) {})
@@ -179,11 +187,15 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 })
 
-.controller('AuthConfirmCtrl', function($scope) {
-
+.controller('AuthConfirmCtrl', function($scope, currauth) {
+  $scope.data = currauth.data;
 })
 
-.controller('AuthSuccessCtrl', function($scope) {})
+.controller('AuthSuccessCtrl', function($scope, $location, currauth) {
+  setTimeout(function() {
+    window.location = currauth.data.redirect;
+  }, 2000);
+})
 
 .factory('addressInfo', function($http) {
   return function(addr, cb) {
@@ -202,5 +214,11 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 .factory('constants', function() {
   return {
     addrUser: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
+  };
+})
+
+.factory('currauth', function() {
+  return {
+    data: {}
   };
 });
