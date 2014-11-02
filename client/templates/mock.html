@@ -6,13 +6,25 @@
     <div class="col-md-4">
       <h2 class="page-header">Documentation</h2>
       <p>This page implements a series of functions sellers should implement in their sites.</p>
+
+      <h2 class="page-header">Bitcoin Address</h2>
+      <p>A random bitcoin address has been generated upon page load. The number below will be updated to reflect any changes in balance.</p>
+
+      <div class="centered">
+        <p id="balance">&#3647{{account.balance}}</p>
+        <p id="balanceDollars">{{account.balanceDollars | currency}}</p>
+
+
+        <div id="qrcode"></div>
+        <code>{{address}}</code> 
+      </div>
+
     </div>
 
     <div class="col-md-8">
       <h2 class="page-header">Functions</h2>
 
       <h3>Request Payment Button</h3>
-      <input type="text" ng-model="payTo" placeholder="Bitcoin address to pay to" />
       <input type="text" ng-model="costPerMonth" placeholder="Cost per month (dollars)" />
       <button class="btn btn-warning">Pay with Bitcoin</button>
 
