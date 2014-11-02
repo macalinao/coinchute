@@ -21,3 +21,17 @@
 .space-down {
   margin-top: 50px;
 }
+
+#balance {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+#balanceDollars {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+.centered {
+  text-align: center;
+}

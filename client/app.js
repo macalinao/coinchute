@@ -23,6 +23,11 @@ angular.module('coinchute', ['ui.router'])
 .controller('HomeCtrl', function($scope) {})
 
 .controller('DashboardCtrl', function($scope) {
+  $scope.account = {
+    balance: 0.89,
+    balanceDollars: 340
+  };
+
   $scope.scheduled = [
     {
       company: 'Quizlet',

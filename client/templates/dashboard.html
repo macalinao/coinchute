@@ -29,13 +29,19 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-12">
-      <h1 class="page-header">Dashboard</h1>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-4">
+      <h2 class="page-header">Overview</h2>
+      <h3>Balance</h3>
+
+      <div class="centered">
+        <p id="balance">&#3647{{account.balance}}</p>
+        <p id="balanceDollars">{{account.balanceDollars | currency}}</p>
+      </div>
+
+    </div>
+
+    <div class="col-md-8">
       <h2 class="page-header">My Scheduled Payments</h2>
 
       <div class="payment" ng-repeat="payment in scheduled">
@@ -45,14 +51,14 @@
             <img class="leftImg" ng-src="{{payment.companyImage}}" />
           </div>
 
-          <div class="col-xs-5">
+          <div class="col-xs-6">
             <h3>{{payment.company}}</h3>
             <p>{{payment.item}} - {{payment.amount | currency}}/{{payment.period}}</p>
             <p><strong>Last Payment:</strong> {{payment.last}}</p>
             <p><strong>Next Payment:</strong> {{payment.next}}</p>
           </div>
 
-          <div class="col-xs-4">
+          <div class="col-xs-3">
             <button class="btn btn-danger space-down"><i class="fa fa-remove"></i> Unsubscribe</button>
           </div>
 
