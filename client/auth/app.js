@@ -7,10 +7,17 @@ angular.module('coinchute', ['ui.router'])
     templateUrl: 'templates/begin.html',
     controller: 'BeginCtrl'
   })
+
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
+  })
+
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html',
+    controller: 'RegisterCtrl'
   });
 
   $urlRouterProvider.otherwise('/begin');
@@ -23,6 +30,17 @@ angular.module('coinchute', ['ui.router'])
   $scope.item = 'Spotify Premium';
 })
 
-.controller('LoginCtrl', function($scope) {
-});
+.controller('LoginCtrl', function($scope) {})
 
+.controller('RegisterCtrl', function($scope) {
+
+  var qrcode = new QRCode("qrcode", {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 175,
+    height: 175,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+});

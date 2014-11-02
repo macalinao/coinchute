@@ -1,3 +1,11 @@
+#qrcode {
+  margin-bottom: 25px;
+}
+
+#qrcode img {
+  margin: 0px auto;
+}
+
 .logo {
   float: left;
   width: 100px;
