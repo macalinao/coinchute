@@ -20,6 +20,41 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     url: '/mock',
     templateUrl: 'templates/mock.html',
     controller: 'MockCtrl'
+  })
+
+  .state('auth', {
+    templateUrl: 'templates/auth.html',
+    controller: 'AuthCtrl'
+  })
+
+  .state('auth.begin', {
+    url: '/auth/begin',
+    templateUrl: 'templates/auth/begin.html',
+    controller: 'AuthBeginCtrl'
+  })
+
+  .state('auth.login', {
+    url: '/auth/login',
+    templateUrl: 'templates/auth/login.html',
+    controller: 'AuthLoginCtrl'
+  })
+
+  .state('auth.register', {
+    url: '/auth/register',
+    templateUrl: 'templates/auth/register.html',
+    controller: 'AuthRegisterCtrl'
+  })
+
+  .state('auth.confirm', {
+    url: '/auth/confirm',
+    templateUrl: 'templates/auth/confirm.html',
+    controller: 'AuthConfirmCtrl'
+  })
+
+  .state('auth.success', {
+    url: '/auth/success',
+    templateUrl: 'templates/auth/success.html',
+    controller: 'AuthSuccessCtrl'
   });
 
   $urlRouterProvider.otherwise('/');
@@ -111,4 +146,35 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 })
 
-.controller('MockCtrl', function($scope) {});
+.controller('MockCtrl', function($scope) {})
+
+.controller('AuthCtrl', function($scope) {})
+
+.controller('AuthBeginCtrl', function($scope) {
+  $scope.company = 'Spotify, Inc.';
+  $scope.price = 4.99;
+  $scope.item = 'Spotify Premium';
+})
+
+.controller('AuthLoginCtrl', function($scope) {})
+
+.controller('AuthRegisterCtrl', function($scope) {
+
+  var qrcode = new QRCode("qrcode", {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 175,
+    height: 175,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+})
+
+.controller('AuthConfirmCtrl', function($scope) {
+
+})
+
+.controller('AuthSuccessCtrl', function($scope) {
+});
+

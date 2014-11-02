@@ -44,3 +44,10 @@
 #qrcode {
   margin-bottom: 15px;
 }
+
+.logo {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
