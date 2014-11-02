@@ -26,19 +26,19 @@
 
       <h3>Request Payment Button</h3>
       <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <input type="text" class="form-control"  ng-model="pay.company" placeholder="Company" />
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control"ng-model="pay.img" placeholder="Image" />
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="pay.cost" placeholder="Cost per month (dollars)" />
-          </div>
-         <div class="form-group">
-           <input type="text" class="form-control"  ng-model="pay.asdf" placeholder="asdf" />
-          </div>
-            <button class="btn btn-warning">Pay with Bitcoin</button>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="pay.company" placeholder="Company" />
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="pay.img" placeholder="Image" />
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="pay.price" placeholder="Price per month (dollars)" />
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="pay.item" placeholder="Item" />
+        </div>
+        <button ng-click="launchWindow()" class="btn btn-warning">Pay with Bitcoin</button>
       </form>
 
       <h3>Pull Recurring Payment From User</h3>
