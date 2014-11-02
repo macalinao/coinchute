@@ -25,6 +25,7 @@
 #balance {
   font-size: 100px;
   font-weight: bold;
+  line-height: 110px;
 }
 
 #balanceDollars {

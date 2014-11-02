@@ -1,4 +1,4 @@
-angular.module('coinchute', ['ui.router'])
+angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -22,7 +22,7 @@ angular.module('coinchute', ['ui.router'])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('DashboardCtrl', function($scope) {
+.controller('DashboardCtrl', function($scope, $modal) {
   $scope.account = {
     balance: 0.89,
     balanceDollars: 340,
@@ -30,6 +30,7 @@ angular.module('coinchute', ['ui.router'])
   };
 
   $scope.scheduled = [{
+    id: 'a',
     company: 'Quizlet',
     companyImage: 'http://quizlet.com/a/i/icons/512.EBT7.jpg',
     amount: 9.99,
@@ -38,6 +39,7 @@ angular.module('coinchute', ['ui.router'])
     last: '2014-10-02',
     next: '2014-11-02'
   }, {
+    id: 'b',
     company: 'Spotify, Inc.',
     companyImage: 'http://www.mobileworldlive.com/wp-content/uploads/2013/05/spotify-logo.jpg',
     amount: 4.99,
@@ -55,5 +57,38 @@ angular.module('coinchute', ['ui.router'])
     colorLight: "#ffffff",
     correctLevel: QRCode.CorrectLevel.H
   });
+
+  $scope.fmtDate = function(date) {
+    return moment(date).format('MMMM Do, YYYY');
+  };
+
+  $scope.unsubscribe = function(pid, index) {
+    var modalInstance = $modal.open({
+      templateUrl: 'templates/confirm-delete.html',
+      controller: function($scope, payment, $modalInstance) {
+        $scope.payment = payment;
+
+        $scope.ok = function() {
+          $modalInstance.close(true);
+        }
+
+        $scope.cancel = function() {
+          $modalInstance.close(false);
+        }
+      },
+      size: 'sm',
+      resolve: {
+        payment: function() {
+          return $scope.scheduled[index];
+        }
+      }
+    });
+
+    modalInstance.result.then(function(res) {
+      if (res) {
+        $scope.scheduled.splice(index, 1);
+      }
+    });
+  };
 
 });
