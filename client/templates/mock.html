@@ -42,9 +42,17 @@
       </form>
 
       <h3>Pull Recurring Payment From User</h3>
-      <input type="text" class="form-control" ng-model="userUUID" placeholder="UUID of user" />
-      <input type="text" class="form-control" ng-model="amount" placeholder="Amount" />
-      <button ng-click="pull()" class="btn btn-primary">Pull Recurring Payment</button>
+      <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="userUUID" placeholder="UUID of user" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="amount" placeholder="Amount" />
+      </div>
+      <div class="form-group">
+        <button ng-click="pull()" class="btn btn-primary">Pull Recurring Payment</button>
+      </div>
+      </form>
 
     </div>
 
