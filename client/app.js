@@ -230,6 +230,17 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     });
   };
 
+  $scope.launchWindow = function() {
+    var c = $scope.pay;
+    window.location = '#/auth/begin?' 
+       + (c.company ? ('company=' + c.company)
+       + (c.img ? ('&img=' + c.img) 
+       + (c.price ? ('&price=' + c.price) 
+       + (c.item ? ('&item=' + c.item) 
+       + (c.callback ? ('&callback=' + c.callback) 
+       + (c.redirect ? ('&redirect=' + c.redirect);
+  };
+
 })
 
 .controller('AuthCtrl', function($scope) {})
@@ -250,15 +261,43 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('AuthLoginCtrl', function($scope) {})
 
-.controller('AuthRegisterCtrl', function($scope, constants) {
+.controller('AuthRegisterCtrl', function($scope, findAddr) {
+  findAddr(function(addrUser) {
 
-  var qrcode = new QRCode("qrcode", {
-    text: constants.addrUser,
-    width: 175,
-    height: 175,
-    colorDark: "#000000",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
+    $scope.address = addrUser;
+
+    var qrcode = new QRCode("qrcode", {
+      text: addrUser,
+      width: 175,
+      height: 175,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    var addr = addrUser;
+    chain.listeners.push(function(x) {
+      var tx = x.payload.transaction;
+
+      var valid = _.find(tx.inputs, function(input) {
+        return _.find(input.addresses, function(a) {
+          return a == addr;
+        });
+      }) || _.find(tx.outputs, function(input) {
+        return _.find(input.addresses, function(a) {
+          return a == addr;
+        });
+      });
+
+      if (!valid) {
+        return;
+      }
+
+      addressInfo(addr, function(data) {
+        $scope.account = data;
+      });
+    });
+
   });
 
 })

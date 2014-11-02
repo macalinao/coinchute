@@ -2,7 +2,13 @@
 
 <p>Send bitcoin to the following address to populate your account with money. You need to send at least BTC 0.513 to schedule this payment.</p>
 
-<div id="qrcode"></div>
+<div class="centered">
+  <div id="qrcode"></div>
+
+  <code>{{address}}</code>
+  <br />
+  <br />
+</div>
 
 <form class="form-horizontal" role="form">
 
@@ -22,7 +28,13 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <a href="#/auth/confirm" class="btn btn-primary">Register</a>
+      <div ng-if="account == null || email == null || password == null">
+        <a class="btn btn-primary disabled pull-left" style="margin-right: 20px;">Register</a>
+        <p>Send some money to this address to allow registration.</p>
+      </div>
+      <div ng-if="account != null">
+        <a href="#/auth/confirm" class="btn btn-primary">Register</a>
+      </div>
     </div>
   </div>
 </form>
