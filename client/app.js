@@ -256,6 +256,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     redirect: s.redirect || 'http://google.com'
   };
   currauth.data = data;
+  console.log(currauth);
   $scope.data = data;
 })
 
@@ -303,6 +304,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 })
 
 .controller('AuthConfirmCtrl', function($scope, currauth) {
+  console.log(currauth);
   $scope.data = currauth.data;
 })
 
