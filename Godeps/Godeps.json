@@ -1,0 +1,48 @@
+{
+	"ImportPath": "github.com/anshaik/Money2020-2014/coinchute/api",
+	"GoVersion": "go1.3.3",
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/go-uuid/uuid",
+			"Comment": "null-12",
+			"Rev": "7dda39b2e7d5e265014674c5af696ba4186679e9"
+		},
+		{
+			"ImportPath": "code.google.com/p/go.crypto/ripemd160",
+			"Comment": "null-230",
+			"Rev": "228579b1f8ccfc93ed9f1709e32e8361ffc9a7ae"
+		},
+		{
+			"ImportPath": "github.com/conformal/btcec",
+			"Comment": "BTCEC_0_2_2-3-gae28fe6",
+			"Rev": "ae28fe6d97b5eb7344e4fe66948e1876c967707d"
+		},
+		{
+			"ImportPath": "github.com/conformal/btcnet",
+			"Comment": "BTCNET_0_1_0-1-g3eeb51a",
+			"Rev": "3eeb51ab54a3f70a2bbfd1de68ffd714b4cd7e28"
+		},
+		{
+			"ImportPath": "github.com/conformal/btcutil",
+			"Comment": "BTCUTIL_0_4_0-2-ga5298a6",
+			"Rev": "a5298a643e1623c552e6a51b50d47b3d43ff9769"
+		},
+		{
+			"ImportPath": "github.com/conformal/btcwire",
+			"Comment": "BTCWIRE_0_2_0-2-ga0fe382",
+			"Rev": "a0fe3822fc6fc80f4d1d1c971850a652610fd5e3"
+		},
+		{
+			"ImportPath": "github.com/conformal/fastsha256",
+			"Rev": "17eaa235e05dfb79432c9594dcafe20bb05690a7"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
+		}
+	]
+}
