@@ -250,15 +250,20 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('AuthLoginCtrl', function($scope) {})
 
-.controller('AuthRegisterCtrl', function($scope, constants) {
+.controller('AuthRegisterCtrl', function($scope, findAddr) {
+  findAddr(function(addrUser) {
 
-  var qrcode = new QRCode("qrcode", {
-    text: constants.addrUser,
-    width: 175,
-    height: 175,
-    colorDark: "#000000",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
+    $scope.address = addrUser;
+
+    var qrcode = new QRCode("qrcode", {
+      text: addrUser,
+      width: 175,
+      height: 175,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
   });
 
 })
