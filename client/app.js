@@ -214,10 +214,20 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
       return;
     }
 
-    addressInfo('1JAo7utfAnFhaSkbBYfBNJYnW89adN51oV', function(data) {
+    addressInfo(addr, function(data) {
       $scope.account = data;
     });
   });
+
+  $scope.pull = function() {
+    $http.post('request', {
+      address: addr,
+      subscription_uuid: $scope.userUUID,
+      amount: $scope.amount
+    }).success(function() {
+      alert('done');
+    });
+  };
 
 })
 

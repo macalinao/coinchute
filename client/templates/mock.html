@@ -29,8 +29,9 @@
       <button class="btn btn-warning">Pay with Bitcoin</button>
 
       <h3>Pull Recurring Payment From User</h3>
-      <input type="text" ng-model="reqPaymentFromUser" placeholder="Email address of user" />
-      <button class="btn btn-primary">Pull Recurring Payment</button>
+      <input type="text" ng-model="userUUID" placeholder="UUID of user" />
+      <input type="text" ng-model="amount" placeholder="Amount" />
+      <button ng-click="pull()" class="btn btn-primary">Pull Recurring Payment</button>
 
     </div>
 
