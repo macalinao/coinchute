@@ -238,7 +238,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
        + (c.price ? ('&price=' + encodeURIComponent(c.price)) : '')
        + (c.item ? ('&item=' + encodeURIComponent(c.item)) : '')
        + (c.callback ? ('&callback=' + encodeURIComponent(c.callback)) : '')
-       + (c.redirect ? ('&redirect=' + encodeURIComponent(c.redirect)) : '/#/mock');
+       + (c.redirect ? ('&redirect=' + encodeURIComponent(c.redirect)) : encodeURIComponent('&redirect=/#/mock'));
   };
 
 })
