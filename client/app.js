@@ -110,6 +110,15 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
       item: 'Spotify Premium',
       last: '2014-10-02',
       next: '2014-11-02'
+    }, {
+      id: 'c',
+      company: 'LOL',
+      companyImage: '',
+      amount: 3.99,
+      period: 'month',
+      item: 'Laughter',
+      last: '2014-10-02',
+      next: '2014-11-02'
     }];
 
     var qrcode = new QRCode("qrcode", {
