@@ -233,12 +233,12 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
   $scope.launchWindow = function() {
     var c = $scope.pay;
     window.location = '#/auth/begin?' 
-       + (c.company ? ('company=' + urlencode(c.company)) : '')
-       + (c.img ? ('&img=' + urlencode(c.img)) : '')
-       + (c.price ? ('&price=' + urlencode(c.price)) : '')
-       + (c.item ? ('&item=' + urlencode(c.item)) : '')
-       + (c.callback ? ('&callback=' + urlencode(c.callback)) : '')
-       + (c.redirect ? ('&redirect=' + urlencode(c.redirect)) : '/#/mock');
+       + (c.company ? ('company=' + encodeURIComponent(c.company)) : '')
+       + (c.img ? ('&img=' + encodeURIComponent(c.img)) : '')
+       + (c.price ? ('&price=' + encodeURIComponent(c.price)) : '')
+       + (c.item ? ('&item=' + encodeURIComponent(c.item)) : '')
+       + (c.callback ? ('&callback=' + encodeURIComponent(c.callback)) : '')
+       + (c.redirect ? ('&redirect=' + encodeURIComponent(c.redirect)) : '/#/mock');
   };
 
 })
