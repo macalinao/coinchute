@@ -14,6 +14,12 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     url: '/dashboard',
     templateUrl: 'templates/dashboard.html',
     controller: 'DashboardCtrl'
+  })
+
+  .state('mock', {
+    url: '/mock',
+    templateUrl: 'templates/mock.html',
+    controller: 'MockCtrl'
   });
 
   $urlRouterProvider.otherwise('/');
@@ -22,12 +28,24 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('DashboardCtrl', function($scope, $modal) {
+.controller('DashboardCtrl', function($scope, $modal, $http) {
   $scope.account = {
-    balance: 0.89,
-    balanceDollars: 340,
+    balance: 0.00,
+    balanceDollars: 0,
     address: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
   };
+
+  var addr = '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v';
+
+  $http.get('http://api.coindesk.com/v1/bpi/currentprice/USD.json').success(function(price) {
+    $http.get('https://api.chain.com/v2/bitcoin/addresses/' + addr + '?api-key-id=855185b9942853b098b8cb59235cadb1').success(function(data) {
+      $scope.account = {
+        balance: parseFloat((data[0].total.balance / (Math.pow(10, 8))).toFixed(2)),
+        balanceDollars: price.bpi.USD.rate,
+        address: addr
+      };
+    });
+  });
 
   $scope.scheduled = [{
     id: 'a',
@@ -91,4 +109,6 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     });
   };
 
-});
+})
+
+.controller('MockCtrl', function($scope) {});
