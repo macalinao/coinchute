@@ -1,4 +1,4 @@
-angular.module('coinchute', ['ui.router'])
+angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -14,6 +14,47 @@ angular.module('coinchute', ['ui.router'])
     url: '/dashboard',
     templateUrl: 'templates/dashboard.html',
     controller: 'DashboardCtrl'
+  })
+
+  .state('mock', {
+    url: '/mock',
+    templateUrl: 'templates/mock.html',
+    controller: 'MockCtrl'
+  })
+
+  .state('auth', {
+    templateUrl: 'templates/auth.html',
+    controller: 'AuthCtrl'
+  })
+
+  .state('auth.begin', {
+    url: '/auth/begin',
+    templateUrl: 'templates/auth/begin.html',
+    controller: 'AuthBeginCtrl'
+  })
+
+  .state('auth.login', {
+    url: '/auth/login',
+    templateUrl: 'templates/auth/login.html',
+    controller: 'AuthLoginCtrl'
+  })
+
+  .state('auth.register', {
+    url: '/auth/register',
+    templateUrl: 'templates/auth/register.html',
+    controller: 'AuthRegisterCtrl'
+  })
+
+  .state('auth.confirm', {
+    url: '/auth/confirm',
+    templateUrl: 'templates/auth/confirm.html',
+    controller: 'AuthConfirmCtrl'
+  })
+
+  .state('auth.success', {
+    url: '/auth/success',
+    templateUrl: 'templates/auth/success.html',
+    controller: 'AuthSuccessCtrl'
   });
 
   $urlRouterProvider.otherwise('/');
@@ -22,14 +63,19 @@ angular.module('coinchute', ['ui.router'])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('DashboardCtrl', function($scope) {
+.controller('DashboardCtrl', function($scope, $modal, addressInfo, constants) {
   $scope.account = {
-    balance: 0.89,
-    balanceDollars: 340,
-    address: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
+    balance: 0.00,
+    balanceDollars: 0,
+    address: constants.addrUser
   };
 
+  addressInfo(constants.addrUser, function(data) {
+    $scope.account = data;
+  });
+
   $scope.scheduled = [{
+    id: 'a',
     company: 'Quizlet',
     companyImage: 'http://quizlet.com/a/i/icons/512.EBT7.jpg',
     amount: 9.99,
@@ -38,6 +84,7 @@ angular.module('coinchute', ['ui.router'])
     last: '2014-10-02',
     next: '2014-11-02'
   }, {
+    id: 'b',
     company: 'Spotify, Inc.',
     companyImage: 'http://www.mobileworldlive.com/wp-content/uploads/2013/05/spotify-logo.jpg',
     amount: 4.99,
@@ -56,4 +103,88 @@ angular.module('coinchute', ['ui.router'])
     correctLevel: QRCode.CorrectLevel.H
   });
 
+  $scope.fmtDate = function(date) {
+    return moment(date).format('MMMM Do, YYYY');
+  };
+
+  $scope.unsubscribe = function(pid, index) {
+    var modalInstance = $modal.open({
+      templateUrl: 'templates/confirm-delete.html',
+      controller: function($scope, payment, $modalInstance) {
+        $scope.payment = payment;
+
+        $scope.ok = function() {
+          $modalInstance.close(true);
+        }
+
+        $scope.cancel = function() {
+          $modalInstance.close(false);
+        }
+      },
+      size: 'sm',
+      resolve: {
+        payment: function() {
+          return $scope.scheduled[index];
+        }
+      }
+    });
+
+    modalInstance.result.then(function(res) {
+      if (res) {
+        $scope.scheduled.splice(index, 1);
+      }
+    });
+  };
+
+})
+
+.controller('MockCtrl', function($scope) {})
+
+.controller('AuthCtrl', function($scope) {})
+
+.controller('AuthBeginCtrl', function($scope) {
+  $scope.company = 'Spotify, Inc.';
+  $scope.price = 4.99;
+  $scope.item = 'Spotify Premium';
+})
+
+.controller('AuthLoginCtrl', function($scope) {})
+
+.controller('AuthRegisterCtrl', function($scope, constants) {
+
+  var qrcode = new QRCode("qrcode", {
+    text: constants.addrUser,
+    width: 175,
+    height: 175,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+})
+
+.controller('AuthConfirmCtrl', function($scope) {
+
+})
+
+.controller('AuthSuccessCtrl', function($scope) {})
+
+.factory('addressInfo', function($http) {
+  return function(addr, cb) {
+    $http.get('http://api.coindesk.com/v1/bpi/currentprice/USD.json').success(function(price) {
+      $http.get('https://api.chain.com/v2/bitcoin/addresses/' + addr + '?api-key-id=855185b9942853b098b8cb59235cadb1').success(function(data) {
+        cb({
+          balance: parseFloat((data[0].total.balance / (Math.pow(10, 8))).toFixed(2)),
+          balanceDollars: price.bpi.USD.rate,
+          address: addr
+        });
+      });
+    });
+  };
+})
+
+.factory('constants', function() {
+  return {
+    addrUser: '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v'
+  };
 });

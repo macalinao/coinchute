@@ -25,6 +25,7 @@
 #balance {
   font-size: 100px;
   font-weight: bold;
+  line-height: 110px;
 }
 
 #balanceDollars {
@@ -42,4 +43,11 @@
 
 #qrcode {
   margin-bottom: 15px;
+}
+
+.logo {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
 }
