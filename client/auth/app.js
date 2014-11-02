@@ -18,6 +18,18 @@ angular.module('coinchute', ['ui.router'])
     url: '/register',
     templateUrl: 'templates/register.html',
     controller: 'RegisterCtrl'
+  })
+
+  .state('confirm', {
+    url: '/confirm',
+    templateUrl: 'templates/confirm.html',
+    controller: 'ConfirmCtrl'
+  })
+
+  .state('success', {
+    url: '/success',
+    templateUrl: 'templates/success.html',
+    controller: 'SuccessCtrl'
   });
 
   $urlRouterProvider.otherwise('/begin');
@@ -43,4 +55,11 @@ angular.module('coinchute', ['ui.router'])
     correctLevel: QRCode.CorrectLevel.H
   });
 
+})
+
+.controller('ConfirmCtrl', function($scope) {
+
+})
+
+.controller('SuccessCtrl', function($scope) {
 });
