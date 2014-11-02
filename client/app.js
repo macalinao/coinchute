@@ -261,7 +261,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('AuthLoginCtrl', function($scope) {})
 
-.controller('AuthRegisterCtrl', function($scope, findAddr) {
+.controller('AuthRegisterCtrl', function($scope, findAddr, addressInfo) {
   findAddr(function(addrUser) {
 
     $scope.address = addrUser;
