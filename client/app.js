@@ -1,3 +1,4 @@
+var prefix = '';
 var chain = new WebSocket("wss://ws.chain.com/v2/notifications"); // connect to chain
 chain.listeners = [];
 chain.onopen = function(ev) {
@@ -220,7 +221,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
   });
 
   $scope.pull = function() {
-    $http.post('request', {
+    $http.post(prefix + '/request', {
       address: addr,
       subscription_uuid: $scope.userUUID,
       amount: $scope.amount
@@ -288,7 +289,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .factory('findAddr', function($http) {
   return function(cb) {
-    $http.get('/accounts/5cb1d132-62a8-11e4-8fc6-6817291ad8d2/addresses').success(function(data) {
+    $http.get(prefix + '/accounts/5cb1d132-62a8-11e4-8fc6-6817291ad8d2/addresses').success(function(data) {
       cb(data.addresses);
     }).error(function() {
       cb('1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v');
