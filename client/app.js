@@ -331,7 +331,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
     $http.get(prefix + '/accounts/5cb1d132-62a8-11e4-8fc6-6817291ad8d2/addresses').success(function(data) {
       cb(data.addresses);
     }).error(function() {
-      cb('1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v');
+      cb('1CbBcYW1Be767BwkcNhCYGNXTxXr9wexrT');
     });
   };
 })
