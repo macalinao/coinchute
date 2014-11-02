@@ -35,3 +35,11 @@
 .centered {
   text-align: center;
 }
+
+#qrcode img {
+  margin: 0px auto;
+}
+
+#qrcode {
+  margin-bottom: 15px;
+}

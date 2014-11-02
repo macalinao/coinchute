@@ -31,12 +31,18 @@
   <div class="row">
 
     <div class="col-md-4">
-      <h2 class="page-header">Overview</h2>
-      <h3>Balance</h3>
+      <h2 class="page-header">Balance</h2>
 
       <div class="centered">
         <p id="balance">&#3647{{account.balance}}</p>
         <p id="balanceDollars">{{account.balanceDollars | currency}}</p>
+      </div>
+
+      <h2 class="page-header">Add Funds</h2>
+      <div class="centered">
+        <p>Send bitcoin to the address below using your favorite wallet.</p>
+        <div id="qrcode"></div>
+        <code>{{account.address}}</code> 
       </div>
 
     </div>
