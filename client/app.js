@@ -63,7 +63,7 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('DashboardCtrl', function($scope, $modal, $http) {
+.controller('DashboardCtrl', function($scope, $modal, addressInfo) {
   $scope.account = {
     balance: 0.00,
     balanceDollars: 0,
@@ -71,15 +71,8 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
   };
 
   var addr = '1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v';
-
-  $http.get('http://api.coindesk.com/v1/bpi/currentprice/USD.json').success(function(price) {
-    $http.get('https://api.chain.com/v2/bitcoin/addresses/' + addr + '?api-key-id=855185b9942853b098b8cb59235cadb1').success(function(data) {
-      $scope.account = {
-        balance: parseFloat((data[0].total.balance / (Math.pow(10, 8))).toFixed(2)),
-        balanceDollars: price.bpi.USD.rate,
-        address: addr
-      };
-    });
+  addressInfo(addr, function(data) {
+    $scope.account = data;
   });
 
   $scope.scheduled = [{
@@ -175,6 +168,18 @@ angular.module('coinchute', ['ui.router', 'ui.bootstrap'])
 
 })
 
-.controller('AuthSuccessCtrl', function($scope) {
-});
+.controller('AuthSuccessCtrl', function($scope) {})
 
+.factory('addressInfo', function($http) {
+  return function(addr, cb) {
+    $http.get('http://api.coindesk.com/v1/bpi/currentprice/USD.json').success(function(price) {
+      $http.get('https://api.chain.com/v2/bitcoin/addresses/' + addr + '?api-key-id=855185b9942853b098b8cb59235cadb1').success(function(data) {
+        cb({
+          balance: parseFloat((data[0].total.balance / (Math.pow(10, 8))).toFixed(2)),
+          balanceDollars: price.bpi.USD.rate,
+          address: addr
+        });
+      });
+    });
+  };
+});
