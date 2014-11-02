@@ -25,15 +25,25 @@
       <h2 class="page-header">Functions</h2>
 
       <h3>Request Payment Button</h3>
-      <input type="text" ng-model="pay.company" placeholder="Company" />
-      <input type="text" ng-model="pay.img" placeholder="Image" />
-      <input type="text" ng-model="pay.cost" placeholder="Cost per month (dollars)" />
-      <input type="text" ng-model="pay.asdf" placeholder="asdf" />
-      <button class="btn btn-warning">Pay with Bitcoin</button>
+      <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <input type="text" class="form-control"  ng-model="pay.company" placeholder="Company" />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"ng-model="pay.img" placeholder="Image" />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="pay.cost" placeholder="Cost per month (dollars)" />
+          </div>
+         <div class="form-group">
+           <input type="text" class="form-control"  ng-model="pay.asdf" placeholder="asdf" />
+          </div>
+            <button class="btn btn-warning">Pay with Bitcoin</button>
+      </form>
 
       <h3>Pull Recurring Payment From User</h3>
-      <input type="text" ng-model="userUUID" placeholder="UUID of user" />
-      <input type="text" ng-model="amount" placeholder="Amount" />
+      <input type="text" class="form-control" ng-model="userUUID" placeholder="UUID of user" />
+      <input type="text" class="form-control" ng-model="amount" placeholder="Amount" />
       <button ng-click="pull()" class="btn btn-primary">Pull Recurring Payment</button>
 
     </div>
